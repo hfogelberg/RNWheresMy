@@ -1,4 +1,4 @@
-#RTWheresMy
+#RNWheresMy
 React native clone of my iOS app.
 
 ````
