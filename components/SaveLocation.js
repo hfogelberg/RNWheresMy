@@ -5,12 +5,15 @@ import {
   StyleSheet
 } from 'react-native';
 import styles from '../styles/styles';
+import Realm from 'realm';
 
 const SaveLocation = React.createClass({
   getInitialState: function() {
     return {
       lat: 0,
       lon: 0,
+      name: '',
+      comment: '',
       location: 'Fetching current location ...'
     };
   },
@@ -49,6 +52,31 @@ const SaveLocation = React.createClass({
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
   },
+
+  savePosition: function() {
+  let realm = new Realm({
+    schema: [{
+      name: 'Locations',
+      properties: {
+        name: 'string',
+        comment: 'string,'
+        lat: 'float',
+        lon: 'float'
+      }}]
+  });
+
+  let locations = realm.objects('Locations').filtered('name=$0', this.state.name);
+  if (locations.length == 0){
+    realm.write(() => {
+      realm.create('Locations', {
+        name: this.state.name,
+        comment: this.state.comment,
+        lat: this.state.lat,
+        lon: this.state.lon
+      })
+    });
+  }
+},
 
   render() {
     return (
