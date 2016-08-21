@@ -9,7 +9,6 @@ import {
 import { EventEmitter } from 'fbemitter';
 import styles from '../styles/styles.js';
 import Drawer from 'react-native-drawer';
-import Icon from 'react-native-vector-icons';
 import navigationHelper from '../helpers/navigation';
 import Menu from './Menu';
 import About from './About';
