@@ -9,7 +9,7 @@ import {
 import { EventEmitter } from 'fbemitter';
 import styles from '../styles/styles.js';
 import Drawer from 'react-native-drawer';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons';
 import navigationHelper from '../helpers/navigation';
 import Menu from './Menu';
 import About from './About';
@@ -52,8 +52,8 @@ class App extends Component {
               ref={(ref) => this._navigator = ref}
               configureScene={(route) => Navigator.SceneConfigs.FloatFromLeft}
               initialRoute={{
-                  id: 'Tides',
-                  title: 'Tides',
+                  id: 'SaveLocation',
+                  title: 'SaveLocation',
                   index: 0
               }}
               renderScene={(route, navigator) => this._renderScene(route, navigator)}
@@ -69,13 +69,13 @@ class App extends Component {
 
   _renderScene(route, navigator) {
       switch (route.id) {
-        case 'Tides':
+        case 'SaveLocation':
           return (
-            <Tides navigator={navigator} {...route.passProps} />);
-          case 'Favorites':
-            return (<Favorites navigator={navigator} {...route.passProps} />);
-          case 'Search':
-            return (<Search navigator={navigator} {...route.passProps} />);
+            <SaveLocation navigator={navigator} />);
+          case 'Map':
+            return (<Map navigator={navigator} />);
+          case 'Locations':
+            return (<Locations navigator={navigator} />);
           case 'About':
             return (<About navigator={navigator} />);
       }
@@ -88,7 +88,7 @@ const NavigationBarRouteMapper = {
       <TouchableOpacity
         style={styles.navBarLeftButton}
         onPress={() => {_emitter.emit('openMenu')}}>
-        <Icon name='menu' size={32} color={'black'} />
+        <Text>Menu</Text>
       </TouchableOpacity>
     )
   },
