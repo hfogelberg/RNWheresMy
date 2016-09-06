@@ -2,38 +2,46 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  TextInput,
+  StyleSheet,
+  ScrollView,
+  TouchableHighlight
 } from 'react-native';
 import styles from '../styles/styles';
 import Realm from 'realm';
+import Button from 'react-native-button'
+import {
+    GiftedForm,
+    GiftedFormManager
+} from 'react-native-gifted-form';
+
+let realm = new Realm({
+  schema: [{
+    name: 'Locations',
+    properties: {
+      name: 'string',
+      comment: 'string',
+      lat: 'float',
+      lon: 'float'
+    }}]
+});
 
 const SaveLocation = React.createClass({
   getInitialState: function() {
     return {
+      formData: {},
       lat: 0,
       lon: 0,
-      name: '',
-      comment: '',
       location: 'Fetching current location ...'
     };
   },
 
   componentDidMount: function() {
-    if (this.props.lat != null) {
-      this.setState({
-        lon: this.props.lon,
-        lat: this.props.lat,
-        location: 'Lat: ' + this.props.lat + ', lon: ' + this.props.lon
-      }, function() {
-        this.savePosition();
-        this.getExtremes();
-      });
-    } else {
-      this.refreshLocation();
-    }
+    this.fetchLocation();
   },
 
-  refreshLocation: function() {
+  fetchLocation: function() {
+    console.log('refreshLocation');
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const coords = position.coords;
@@ -43,8 +51,6 @@ const SaveLocation = React.createClass({
             lon: coords.longitude,
             lat: coords.latitude,
             location: 'Lat: ' + coords.latitude + ', Lon: ' + coords.longitude
-          }, function() {
-            // this.reverseGeocode();
           });
         }
       },
@@ -53,36 +59,100 @@ const SaveLocation = React.createClass({
     );
   },
 
-  savePosition: function() {
-  let realm = new Realm({
-    schema: [{
-      name: 'Locations',
-      properties: {
-        name: 'string',
-        comment: 'string,'
-        lat: 'float',
-        lon: 'float'
-      }}]
-  });
+  saveFormData: function(caption, comment) {
+    console.log('Save input', realm.path);
+    console.log(caption + ' ' + comment);
 
-  let locations = realm.objects('Locations').filtered('name=$0', this.state.name);
-  if (locations.length == 0){
     realm.write(() => {
       realm.create('Locations', {
-        name: this.state.name,
-        comment: this.state.comment,
+        name: caption,
+        comment: comment,
         lat: this.state.lat,
         lon: this.state.lon
       })
     });
-  }
-},
+  },
+
+  renderForm: function() {
+    return (
+      <GiftedForm
+        formName='locationForm'
+        validators={{
+          caption: {
+            title: 'Caption',
+            validate: [{
+              validator: 'isLength',
+              arguments: [3, 23],
+              message: '{TITLE} must be between {ARGS[0]} and {ARGS[1]} characters'
+            }]
+          }
+        }}
+
+        defaults={{
+          caption: ''
+        }}
+      >
+
+      <GiftedForm.SeparatorWidget />
+        <GiftedForm.TextInputWidget
+          name='caption'
+          autoComplete={false}
+          autoCorrect={false}
+          autoCapitalize="sentences"
+          spellcheck={false}
+          title='Caption'
+          clearButtonMode='while-editing'
+          autoFocus={true}
+        />
+
+
+      <GiftedForm.SeparatorWidget/>
+
+        <GiftedForm.TextAreaWidget
+            autoComplete={false}
+            autoCorrect={false}
+            autoCapitalize="sentences"
+            spellcheck={false}
+            name='comment'
+            title='Comment'
+            placeholder='Some reminder'
+            clearButtonMode='while-editing'
+          />
+
+        <GiftedForm.SubmitWidget
+          title='Save'
+          widgetStyles={{
+            submitButton: {
+              backgroundColor: 'orange',
+            }
+          }}
+          onSubmit={(isValid, values, validationResults, postSubmit = null, modalNavigator = null) => {
+            if (isValid === true) {
+              console.log('Valid');
+              postSubmit();
+              GiftedFormManager.reset('locationForm');
+              this.saveFormData(values.caption, values.comment)
+            } else {
+              console.log('Not valid');
+            }
+          }}
+        />
+      </GiftedForm>
+    )
+  },
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Save Location</Text>
-        <Text>{this.state.location}</Text>
+        <View>
+          <Text>Save Location</Text>
+        </View>
+        <View style={styles.locationContainer}>
+          <Text>{this.state.location}</Text>
+        </View>
+        <View style={styles.formContainer}>
+          {this.renderForm()}
+        </View>
       </View>
     )
   }
