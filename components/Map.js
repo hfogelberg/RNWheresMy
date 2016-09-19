@@ -7,6 +7,10 @@ import {
 import styles from '../styles/styles';
 
 class Map extends Component {
+  componentDidMount() {
+    console.log('Map mounted', this.props.name);
+  }
+
   render() {
     return (
       <View style={styles.container}>

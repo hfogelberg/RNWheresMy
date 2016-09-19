@@ -31,6 +31,7 @@
 		854B82B68EFA46BA8F695B51 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80FC9121C7B845ACBFE6D18E /* FontAwesome.ttf */; };
 		8576D8FD494442DEA72D69E9 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB73A579982247768F5EC8E9 /* Entypo.ttf */; };
 		955EE25712BC48E18DF722F5 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B78614798A347998B344A51 /* EvilIcons.ttf */; };
+		AF9979B41D901E390079DEC2 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9979B31D901E390079DEC2 /* Logo.png */; };
 		B2D637D518884EE1966CC701 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42A7921D0E0B47258E985F68 /* Octicons.ttf */; };
 		C2C793C92B8648F58487F77C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6A051B15E942778A25B5E0 /* libz.tbd */; };
 		C344543CFD7B45A4812E5BE9 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B11853F0CEB242AFA8336313 /* Zocial.ttf */; };
@@ -164,6 +165,7 @@
 		8A6A051B15E942778A25B5E0 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		92562DA3E3E24AAA93177362 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		93B02EEF5F554DA09A93E85D /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		AF9979B31D901E390079DEC2 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		B11853F0CEB242AFA8336313 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		CB70A5487476462CB702B331 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		EB73A579982247768F5EC8E9 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		13B07FAE1A68108700A75B9A /* RNWheresMy */ = {
 			isa = PBXGroup;
 			children = (
+				AF9979B31D901E390079DEC2 /* Logo.png */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -446,6 +449,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 53LFDNJTBE;
 					};
 				};
 			};
@@ -621,6 +627,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8576D8FD494442DEA72D69E9 /* Entypo.ttf in Resources */,
 				955EE25712BC48E18DF722F5 /* EvilIcons.ttf in Resources */,
+				AF9979B41D901E390079DEC2 /* Logo.png in Resources */,
 				854B82B68EFA46BA8F695B51 /* FontAwesome.ttf in Resources */,
 				ED4315EB0D3C4581BD5180D9 /* Foundation.ttf in Resources */,
 				19290634A7BC4A24BB99C134 /* Ionicons.ttf in Resources */,
@@ -733,6 +740,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -756,6 +764,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

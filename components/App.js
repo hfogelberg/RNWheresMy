@@ -72,7 +72,7 @@ class App extends Component {
           return (
             <SaveLocation navigator={navigator} />);
           case 'Map':
-            return (<Map navigator={navigator} />);
+            return (<Map navigator={navigator} {...route.passProps} />);
           case 'Locations':
             return (<Locations navigator={navigator} />);
           case 'About':

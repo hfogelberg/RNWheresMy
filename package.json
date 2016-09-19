@@ -8,6 +8,7 @@
   "dependencies": {
     "fbemitter": "^2.0.2",
     "moment": "^2.14.1",
+    "native-base": "^0.5.8",
     "react": "15.2.1",
     "react-native": "0.31.0",
     "react-native-button": "^1.7.0",
