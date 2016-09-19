@@ -37,5 +37,8 @@ export default StyleSheet.create({
   },
   buttonDisabled: {
     color: 'red'
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
   }
 });
