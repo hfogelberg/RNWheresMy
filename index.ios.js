@@ -3,4 +3,4 @@
 import React, { AppRegistry } from 'react-native';
 import App from './components/App';
 
-AppRegistry.registerComponent('RNWheresMy', () => App);
+AppRegistry.registerComponent('RNTideTracker', () => App);

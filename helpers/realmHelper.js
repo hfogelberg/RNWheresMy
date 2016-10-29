@@ -1,45 +1,51 @@
 import React from 'react';
 import Realm from 'realm';
-import Moment from 'moment';
 import _ from 'underscore';
 
 let realm = new Realm({
   schema: [{
     name: 'Locations',
     properties: {
-      id: 'string',
-      name: 'string',
-      comment: 'string',
+      station: 'string',
       lat: 'float',
-      lon: 'float',
-      date: 'date'
+      lon: 'float'
     }}]
 });
 
 export default class RealmHelper {
-  static saveItem(item) {
-    console.log('Save input', realm.path);
+  static saveLocation(location) {
+
+    console.log('Realm helper save location', location);
+
+    console.log('Saving to Realm' + realm.path);
     let id = (new Date).getTime().toString();
     console.log('ID: ' + id);
 
     try{
-      realm.write(() => {
-        realm.create('Locations', {
-          id: id,
-          name: item.name,
-          comment: item.comment,
-          lat: item.lat,
-          lon: item.lon,
-          date: new Date()
-        })
-      });
+      let locations = realm.objects('Locations').filtered('station=$0', location.station);
+      if (locations.length == 0){
+        realm.write(() => {
+          realm.create('Locations', {
+            station: location.station,
+            lat: location.lat,
+            lon: location.lon
+          })
+        });
+      }
     } catch(err) {
       console.log('Error saving to Realm', err);
     }
   }
 
-  static getItems() {
+  static getLocations() {
     let items = realm.objects('Locations');
     return items;
+  }
+
+  static deleteLocation(favorite) {
+    console.log('Delete: ' + favorite.station);
+    realm.write(() => {
+      realm.delete(favorite);
+    });
   }
 }

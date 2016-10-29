@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-class RNWheresMy extends Component {
+class RNTideTracker extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('RNWheresMy', () => RNWheresMy);
+AppRegistry.registerComponent('RNTideTracker', () => RNTideTracker);
